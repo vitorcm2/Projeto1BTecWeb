@@ -43,6 +43,18 @@ public class TabelaController {
 
 		return "Editar";
 	}
+	
+	@RequestMapping("editarreal")
+	public String editaPost(Tabela tarefa) throws ParseException {
+		TabelaDAO dao = new TabelaDAO();
+		try {
+			dao.editTarefa(tarefa);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "Cadastro";
+	}
 
 	@RequestMapping("deletar")
 	public String remove(Tabela tarefa) {
@@ -65,7 +77,7 @@ public class TabelaController {
 			filtro = "categoria";
 		}
 		session.setAttribute("filtro", filtro);
-		return "Cadastrado";
+		return "Cadastradofiltrado";
 	}
 
 }

@@ -15,18 +15,20 @@
 	<%
 		TabelaDAO dao = new TabelaDAO();
 		String usuario = (String) session.getAttribute("user");
-		List<Tabela> pessoas = dao.getLista(usuario);
+		String filtro = (String) session.getAttribute("filtro");
+		List<Tabela> pessoas = dao.doFiltro(usuario, Integer.valueOf(filtro));
 	%>
 	<br>
 	<table border='1'>
 		<tr>
 
 			<form method="post" action="adicionar">
-				Tarefa: <input type="text" required='required' name="tarefa"> <a>&nbsp;
-					&nbsp; &nbsp; &nbsp;</a> Data: <input type="date" required='required' name="data">
-				<a>&nbsp; &nbsp; &nbsp; &nbsp;</a><input type="hidden"
-					value="<%=usuario%>" name="user"> Importância: <select
-					name="importancia">
+
+				Tarefa: <input type="text" required='required' name="tarefa">
+				<a>&nbsp; &nbsp; &nbsp; &nbsp;</a> Data: <input type="date"
+					required='required' name="data"> <a>&nbsp; &nbsp;
+					&nbsp; &nbsp;</a><input type="hidden" value="<%=usuario%>" name="user">
+				Importância: <select name="importancia">
 					<option value="1">1</option>
 					<option value="2">2</option>
 					<option value="3">3</option>
@@ -44,7 +46,7 @@
 					&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;
 					&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</a>
 			</form>
-			<form method="post" action="Entrar.jsp">
+			<form method="post" action="logout">
 				Usuário:
 				<%=usuario%>
 				<a>&nbsp; &nbsp; &nbsp; &nbsp;</a> <input type="submit"
@@ -58,8 +60,8 @@
 			<a>&nbsp; &nbsp;</a>
 			<form method="post" action="filtrar">
 				<input type="submit" value="Data" /><input type="hidden"
-					value="<%=usuario%>" name="user"><input type="hidden" value=<%=1%>
-					name="filtro" />
+					value="<%=usuario%>" name="user"><input type="hidden"
+					value=<%=1%> name="filtro" />
 			</form>
 			<a>&nbsp; &nbsp; </a>
 			<form method="post" action="filtrar">
@@ -86,9 +88,9 @@
 					pattern="dd-MM-yyyy" /></td>
 			<td><%=pessoa.getCategoria()%></td>
 			<td><%=pessoa.getImportancia()%></td>
-			<td><form method="get" action="editar">
-					<input type="hidden" name="user" value=<%=usuario%>>
-					<input type="hidden" name="id" value=<%=pessoa.getId()%>> <input
+			<td><form method="get" action="editartarefa">
+					<input type="hidden" name="user" value=<%=usuario%>> <input
+						type="hidden" name="id" value=<%=pessoa.getId()%>> <input
 						type="hidden" name="tarefa" value=<%=pessoa.getTarefa()%>>
 					<input type="hidden" name="data"
 						value=<fmt:formatDate value="<%=pessoa.getData().getTime()%>"
@@ -96,12 +98,12 @@
 					<input type="hidden" name="categoria"
 						value=<%=pessoa.getCategoria()%>> <input type="hidden"
 						name="data" value=<%=pessoa.getImportancia()%>> <input
-						type="submit" value="Editar">
+						type="submit" value="editar">
 				</form></td>
-			<td><form method="post" action="deletar">
+			<td><form method="post" action="deletartarefa">
 					<input type="hidden" name="id" value=<%=pessoa.getId()%>> <input
 						type="hidden" value="<%=usuario%>" name="user"> <input
-						type="submit" value="Deletar">
+						type="submit" value="deletar">
 				</form></td>
 		</tr>
 		<%

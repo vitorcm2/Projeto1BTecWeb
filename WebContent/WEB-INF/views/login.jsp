@@ -59,7 +59,7 @@
 		</table>
 
 	</form>
-	<form method="post" action="Cadastrar.jsp">
+	<form method="post" action="Cadastrar">
 		<table>
 			<tr>
 				<td></td>

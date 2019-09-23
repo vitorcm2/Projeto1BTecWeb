@@ -1,13 +1,10 @@
 package mvc.controller;
 
 import java.io.IOException;
-import java.sql.SQLException;
-import java.util.List;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -28,14 +25,24 @@ public class LoginController {
 	
 	@RequestMapping("Cadastrar")
 	public String cadastrar() {
-		return "cadastrar";
+		return "Cadastrar";
 	}
 
 	@RequestMapping(value = "fazCadastro", method = RequestMethod.POST)
-	public String upload(Cadastro usuario) throws IOException {
+	public String upload(Cadastro usuario, @ModelAttribute("password") String password,
+			@ModelAttribute("password2") String password2) throws IOException {
 		LoginDAO dao = new LoginDAO();
-		dao.adiciona(usuario);
-		return "login";
+		if (dao.verifica(usuario)) {
+			return "UsuarioExiste";
+		} else {
+			if (password == password2) {
+				dao.adiciona(usuario);
+				return "Cadastrado";
+			} else {
+				return "SenhasDiferentes";
+			}
+
+		}
 	}
 
 	@RequestMapping("fazLogin")
