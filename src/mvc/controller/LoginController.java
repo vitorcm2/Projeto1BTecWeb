@@ -38,7 +38,7 @@ public class LoginController {
 			if (password.contentEquals(password2)) {
 				dao.adiciona(usuario);
 				
-				return "Login";
+				return "login";
 			} else {
 				return "SenhasDiferentes";
 			}
