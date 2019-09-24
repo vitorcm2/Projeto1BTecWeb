@@ -35,9 +35,10 @@ public class LoginController {
 		if (dao.verifica(usuario)) {
 			return "UsuarioExiste";
 		} else {
-			if (password == password2) {
+			if (password.contentEquals(password2)) {
 				dao.adiciona(usuario);
-				return "Cadastrado";
+				
+				return "Login";
 			} else {
 				return "SenhasDiferentes";
 			}

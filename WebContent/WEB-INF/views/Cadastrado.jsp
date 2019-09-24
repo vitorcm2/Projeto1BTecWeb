@@ -33,7 +33,7 @@
 				</select> <a>&nbsp; &nbsp; &nbsp; &nbsp;</a> Categoria: <select
 					name="categoria">
 					<option value="Insper">Insper</option>
-					<option value="Trabalaho">Trabalho</option>
+					<option value="Trabalho">Trabalho</option>
 					<option value="Pessoal">Pessoal</option>
 				</select> <a>&nbsp; &nbsp; &nbsp; &nbsp;</a> <input type="submit"
 					value="Adicionar"> <a>&nbsp; &nbsp; &nbsp; &nbsp;
@@ -44,7 +44,7 @@
 					&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;
 					&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</a>
 			</form>
-			<form method="post" action="Entrar.jsp">
+			<form method="post" action="logout">
 				Usuário:
 				<%=usuario%>
 				<a>&nbsp; &nbsp; &nbsp; &nbsp;</a> <input type="submit"
@@ -95,7 +95,7 @@
 					pattern="yyyy-MM-dd" />>
 					<input type="hidden" name="categoria"
 						value=<%=pessoa.getCategoria()%>> <input type="hidden"
-						name="data" value=<%=pessoa.getImportancia()%>> <input
+						name="importancia" value=<%=pessoa.getImportancia()%>> <input
 						type="submit" value="Editar">
 				</form></td>
 			<td><form method="post" action="deletar">

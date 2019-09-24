@@ -9,14 +9,18 @@
 <body>
 	<%@ page import="java.util.*,mvc.model.TabelaDAO"%>
 	<%@ page import="java.util.*,mvc.model.Tabela"%>
+	<%@ page import="java.util.*, java.text.SimpleDateFormat"%>
 	<%
 		TabelaDAO dao = new TabelaDAO();
-		String usuario = (String) session.getAttribute("usuario");
+		String usuario = (String) session.getAttribute("user");
 		String tarefa = (String) session.getAttribute("tarefa");
-		String data = (String) session.getAttribute("data");
-		String id = (String) session.getAttribute("id");
+		String data;
+		Calendar data2 = (Calendar) session.getAttribute("data");
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		dateFormat.setTimeZone(data2.getTimeZone());
+		data = dateFormat.format(data2.getTime());
 		
-		System.out.println(data);
+		Integer id = (Integer) session.getAttribute("id");
 		Integer importancia = (Integer) request.getAttribute("importancia");
 		String categoria = (String) request.getAttribute("categoria");
 		List<Tabela> pessoas = dao.getLista(usuario);
@@ -31,7 +35,7 @@
 				Tarefa: <input type="text" name="tarefa" value="<%=tarefa%>">
 				<a>&nbsp; &nbsp; &nbsp; &nbsp;</a> Data: <input type="date"
 					name="data" value="<%=data%>"> <a>&nbsp; &nbsp; &nbsp;
-					&nbsp;</a><input type="hidden" value="<%=usuario%>" name="usuario">
+					&nbsp;</a><input type="hidden" value="<%=usuario%>" name="user">
 					<input type="hidden" value="<%=id%>" name="id">
 				Importância: <select name="importancia">
 					<option value="1">1</option>

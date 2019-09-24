@@ -1,11 +1,14 @@
 package mvc.model;
 import java.util.Calendar;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 public class Tabela {
 
 	private Integer id;
 	private String user;
 	private String tarefa;
+	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Calendar data;
 	private int importancia;
 	private String categoria;

@@ -15,15 +15,14 @@
 	<%
 		TabelaDAO dao = new TabelaDAO();
 		String usuario = (String) session.getAttribute("user");
-		String filtro = (String) session.getAttribute("filtro");
-		List<Tabela> pessoas = dao.doFiltro(usuario, Integer.valueOf(filtro));
+		Integer filtro = (Integer) session.getAttribute("filtro");
+		List<Tabela> pessoas = dao.doFiltro(usuario, filtro);
 	%>
 	<br>
 	<table border='1'>
 		<tr>
 
 			<form method="post" action="adicionar">
-
 				Tarefa: <input type="text" required='required' name="tarefa">
 				<a>&nbsp; &nbsp; &nbsp; &nbsp;</a> Data: <input type="date"
 					required='required' name="data"> <a>&nbsp; &nbsp;
@@ -35,7 +34,7 @@
 				</select> <a>&nbsp; &nbsp; &nbsp; &nbsp;</a> Categoria: <select
 					name="categoria">
 					<option value="Insper">Insper</option>
-					<option value="Trabalaho">Trabalho</option>
+					<option value="Trabalho">Trabalho</option>
 					<option value="Pessoal">Pessoal</option>
 				</select> <a>&nbsp; &nbsp; &nbsp; &nbsp;</a> <input type="submit"
 					value="Adicionar"> <a>&nbsp; &nbsp; &nbsp; &nbsp;
@@ -88,7 +87,7 @@
 					pattern="dd-MM-yyyy" /></td>
 			<td><%=pessoa.getCategoria()%></td>
 			<td><%=pessoa.getImportancia()%></td>
-			<td><form method="get" action="editartarefa">
+			<td><form method="get" action="editar">
 					<input type="hidden" name="user" value=<%=usuario%>> <input
 						type="hidden" name="id" value=<%=pessoa.getId()%>> <input
 						type="hidden" name="tarefa" value=<%=pessoa.getTarefa()%>>
@@ -97,13 +96,13 @@
 					pattern="yyyy-MM-dd" />>
 					<input type="hidden" name="categoria"
 						value=<%=pessoa.getCategoria()%>> <input type="hidden"
-						name="data" value=<%=pessoa.getImportancia()%>> <input
-						type="submit" value="editar">
+						name="importancia" value=<%=pessoa.getImportancia()%>> <input
+						type="submit" value="Editar">
 				</form></td>
-			<td><form method="post" action="deletartarefa">
+			<td><form method="post" action="deletar">
 					<input type="hidden" name="id" value=<%=pessoa.getId()%>> <input
 						type="hidden" value="<%=usuario%>" name="user"> <input
-						type="submit" value="deletar">
+						type="submit" value="Deletar">
 				</form></td>
 		</tr>
 		<%
